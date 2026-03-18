@@ -1,50 +1,69 @@
+from tkinter.font import BOLD
 import sys
 import random
+import tkinter
 import os
 os.system("")
 import colorama
 from colorama import Fore, Back, Style
 colorama.init(autoreset=True)
 
+player_score = 0
+computer_score = 0
 
 
 
 while True:
-    print(Fore.BLUE + "==============\nRock Paper Scissors\n==============")
-    print("1. Rock")
-    print("2. Paper")
-    print("3. Scissors")
-    print("==============")
+    print(Fore.LIGHTBLUE_EX + "\n\n     ==============\n     Rock Paper Scissors\n     ==============")
+    print(Fore.LIGHTBLACK_EX + "     1. Rock")
+    print(Fore.WHITE + "     2. Paper")
+    print(Fore.RED + "     3. Scissors")
+    print(Fore.LIGHTBLUE_EX + "     ==============\n\n")
 
 
-    prompt = Fore.BLUE + "Please choose a number between 1-3:\n (   )\033[3D"
-    player = int(input(prompt))
-    if player == 1:
-        choice = Fore.LIGHTBLACK_EX + "Rock"
-    elif player == 2:
-        choice = Fore.WHITE + "Paper"
-    elif player == 3:
-        choice = Fore.RED + "Scissors"
+    prompt = Fore.LIGHTBLUE_EX + "     Please choose a number between 1-3:\n     (   )\033[3D"
+    player = (input(prompt))
+    if player == "1":
+        choice = "Rock"
+    elif player == "2":
+        choice = "Paper"
+    elif player == "3":
+        choice = "Scissors"
     else:
-        print(Fore.RED + "Invalid choice\n")
+        print(Fore.RED + "\n     Invalid choice\n")
         continue
 
-    print(Fore.GREEN + "You chose: ", choice)
+    player = int(player)
 
-    computer = random.choice([Fore.LIGHTBLACK_EX + "Rock", Fore.WHITE + "Paper", Fore.RED + "Scissors"])
-    print(Fore.MAGENTA + "Computer chose: ", computer)
+    colors = {"Rock": Fore.LIGHTBLACK_EX, "Paper": Fore.WHITE, "Scissors": Fore.RED}
+    print(Fore.LIGHTGREEN_EX + "\n     You chose: ", colors[choice] + choice)
+
+    computer = random.choice(["Rock", "Paper", "Scissors"])
+    print(Fore.LIGHTRED_EX + "     Computer chose: ", colors[computer] + computer + "\n\n")
 
     if choice == computer:
-        print(Fore.YELLOW + "Tie")
+        print(Fore.YELLOW + "     Tie")
     elif choice == "Rock" and computer == "Scissors":
-        print(Fore.GREEN + "Player wins")
+        print(Fore.GREEN + "     Player wins")
+        player_score += 1
     elif choice == "Paper" and computer == "Rock":
-        print(Fore.GREEN + "Player wins")
+        print(Fore.GREEN + "     Player wins")
+        player_score += 1
     elif choice == "Scissors" and computer == "Paper":
-        print(Fore.GREEN + "Player wins")
+        print(Fore.GREEN + "     Player wins")
+        player_score += 1
     else:
-        print(Fore.RED + "Computer wins")
+        print(Fore.RED + "     Computer wins")
+        computer_score += 1
+    print(Fore.LIGHTBLUE_EX + "\n\n     ==============")
+    print(Fore.LIGHTGREEN_EX + "\n\n\u001b[6m     Player Score: ", player_score)
+    print(Fore.LIGHTRED_EX + "\n\u001b[6m     Computer Score: ", computer_score)
+    print(Fore.LIGHTBLUE_EX + "\n     ==============")
+    while True:
+        play_again = input(Fore.LIGHTBLUE_EX + "\n     Do you want to play again? (y/n): \n     ==============\n     (   )\033[3D").strip().lower()
+        if play_again in ["y", "n"]:
+            break
+        print(Fore.RED + "     Please enter 'y' or 'n'")
 
-    play_again = input(Fore.BLUE + "\nDo you want to play again? (y/n): ").strip().lower()
-    if play_again != "y":
+    if play_again == "n":
         break
