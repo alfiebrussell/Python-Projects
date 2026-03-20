@@ -14,3 +14,6 @@ gitGraph
    commit
    commit
 ```
+
+
+(https://mermaid.js.org/syntax/gitgraph.html)
